@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 
 
-exports.userPortected = asyncHandler(async (req, res, next) => {
+const userPortected = asyncHandler(async (req, res, next) => {
 
     const { chatUser } = req.cookies
     if (!chatUser) {
@@ -18,3 +18,4 @@ exports.userPortected = asyncHandler(async (req, res, next) => {
     })
 
 })
+module.exports = userPortected
