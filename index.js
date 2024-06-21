@@ -17,6 +17,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
+app.use('/profiles', express.static('profiles'));
 
 
 app.use("/api/v1/auth", require("./routes/auth.routes"))
