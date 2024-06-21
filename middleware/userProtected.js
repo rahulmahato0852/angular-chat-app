@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const userPortected = asyncHandler(async (req, res, next) => {
 
     const { chatUser } = req.cookies
+    console.log(chatUser);
     if (!chatUser) {
         return res.status(401).json({ message: "No cookie found" })
     }
