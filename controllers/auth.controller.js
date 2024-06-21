@@ -92,7 +92,11 @@ exports.verifyOtp = expressAsyncHandler(async (req, res) => {
     }
     const token = jwt.sign({ userId: result._id }, process.env.JWT_KEY, { expiresIn: 3600000 })
 
-    res.cookie("chatUser", token)
+    res.cookie("chatUser", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+    })
     res.status(200).json({ message: "Login Success", result: { name: result.name, email: result.email, mobile: result.mobile, hero: result.hero } })
 })
 
