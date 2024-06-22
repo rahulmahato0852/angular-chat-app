@@ -97,6 +97,11 @@ exports.verifyOtp = expressAsyncHandler(async (req, res) => {
         secure: true,
         sameSite: 'None'
     })
-    res.status(200).json({ message: "Login Success", result: { name: result.name, email: result.email, mobile: result.mobile, hero: result.hero } })
+    res.status(200).json({ message: "Login Success", result: { _id: result._id, name: result.name, email: result.email, mobile: result.mobile, hero: result.hero } })
 })
 
+
+exports.logOutUser = expressAsyncHandler(async (req, res, next) => {
+    res.clearCookie("chatUser")
+    res.status(200).json({ message: "Log Out success" })
+})

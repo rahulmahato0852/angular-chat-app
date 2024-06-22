@@ -3,12 +3,11 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const userPortected = require('./middleware/userProtected')
-
+const { app, server } = require('./socket/socket')
 require("dotenv").config({ path: "" })
 
 
 
-const app = express()
 
 app.use(cors({
     origin: "http://localhost:4200",
@@ -22,6 +21,7 @@ app.use('/profiles', express.static('profiles'));
 
 app.use("/api/v1/auth", require("./routes/auth.routes"))
 app.use("/api/v1/user", userPortected, require("./routes/user.routes"))
+app.use("/api/v1/chat", userPortected, require("./routes/chat.routes"))
 
 
 
@@ -39,6 +39,6 @@ mongoose.connect(process.env.MONGO_URL)
 
 mongoose.connection.once("open", () => {
     console.log("Mongoose connected ");
-    app.listen(process.env.PORT, console.log("Server running"))
+    server.listen(process.env.PORT, console.log("Server running"))
 })
 
