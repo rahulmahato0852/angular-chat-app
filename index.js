@@ -13,9 +13,11 @@ app.use(cors({
     origin: "http://localhost:4200",
     credentials: true,
 }))
+app.use(express.static(path.join(__dirname, "dist")))
 app.use(express.json())
 app.use(cookieParser())
 
+app.use('/profiles', express.static('profiles'));
 app.use('/profiles', express.static('profiles'));
 
 
@@ -26,7 +28,8 @@ app.use("/api/v1/chat", userPortected, require("./routes/chat.routes"))
 
 
 app.use(('*', (req, res) => {
-    res.status(404).json({ message: "No resource found" })
+    res.sendFile(path.join(__dirname, "dist", "client", "browser", "index.html"))
+    // res.status(404).json({ message: "No resource found" })
 }))
 
 
