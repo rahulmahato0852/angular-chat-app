@@ -29,6 +29,7 @@ app.use("/api/v1/chat", userPortected, require("./routes/chat.routes"))
 
 
 app.use(('*', (req, res) => {
+    console.log(path.join(__dirname, "dist", "client", "browser", "index.html"));
     res.sendFile(path.join(__dirname, "dist", "client", "browser", "index.html"))
     // res.status(404).json({ message: "No resource found" })
 }))
