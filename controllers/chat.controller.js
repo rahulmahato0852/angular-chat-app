@@ -14,16 +14,16 @@ exports.sendMessage = asyncHandler(async (req, res) => {
             { users: recevier },
         ]
     })
+    let newMsg
     if (result) {
-        await Message.create({ message, chat: result._id, sender: userId })
-        console.log("send succes");
+        const msg = (await Message.create({ message, chat: result._id, sender: userId }))
+        newMsg = await msg.populate("sender")
     } else {
         const x = await Chat.create({ users: [userId, recevier] })
-        await Message.create({ message, chat: x._id, sender: userId })
-        console.log("new created chat");
+        const msg = await Message.create({ message, chat: x._id, sender: userId })
+        newMsg = await msg.populate("sender")
     }
-    io.to(userId).emit("send-response", userId)
-    io.to(recevier).emit("send-response", userId)
+    io.to(recevier).emit("send-response", newMsg)
     res.status(200).json({ message: "Message Send Success" })
 })
 
