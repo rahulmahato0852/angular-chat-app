@@ -4,7 +4,12 @@ const { Server } = require("socket.io")
 
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server, { cors: { origin: "https://angular-chat-oabq9asre-rahul-mehatas-projects.vercel.app" } })
+const io = new Server(server, {
+    cors: {
+        //  origin: "https://angular-chat-oabq9asre-rahul-mehatas-projects.vercel.app"
+        origin: "http://localhost:4200"
+    }
+})
 
 let ONLINE_USERS = []
 io.on("connection", socket => {
