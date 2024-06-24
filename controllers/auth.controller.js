@@ -19,7 +19,7 @@ exports.registerUser = expressAsyncHandler(async (req, res) => {
 
         const { email, password, name, mobile } = req.body
 
-        const x = ValidationNew(res, [
+        ValidationNew(res, [
             { value: email, validations: [{ key: "isEmpty", except: false }, { key: "isEmail", except: true }] },
             { value: password, validations: [{ key: "isEmpty", except: false }, { key: "isStrongPassword", except: true }] },
             { value: name, validations: [{ key: "isEmpty", except: false }] },
@@ -28,9 +28,9 @@ exports.registerUser = expressAsyncHandler(async (req, res) => {
 
         const result = await User.findOne({ email })
         if (result) {
-            return res.status(400).json({ message: "Email Already Exists" })
+            return res.status(400).json({ message: "Email Already Exists" });
         }
-        const hashPass = await bcrypt.hash(password, 10)
+        const hashPass = await bcrypt.hash(password, 10);
 
         await User.create({ name, email, mobile, password: hashPass, hero: req.file.filename })
 
