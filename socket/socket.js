@@ -6,8 +6,8 @@ const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        //  origin: "https://angular-chat-oabq9asre-rahul-mehatas-projects.vercel.app"
-        origin: "http://localhost:4200"
+        origin: "https://angular-chat-oabq9asre-rahul-mehatas-projects.vercel.app"
+        // origin: "http://localhost:4200"
     }
 })
 
