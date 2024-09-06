@@ -11,8 +11,8 @@ require("dotenv").config({ path: "" })
 
 
 app.use(cors({
-    origin: "https://angular-chat-ap.vercel.app",
-    // origin: "http://localhost:4200",
+    // origin: "https://angular-chat-ap.vercel.app",
+    origin: "http://localhost:4200",
     credentials: true,
 }))
 app.use(express.static(path.join(__dirname, "dist/client")))
